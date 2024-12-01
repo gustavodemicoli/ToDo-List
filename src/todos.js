@@ -1,4 +1,16 @@
-export function ToDo(title, desc, dueDate, priority, notes="", checklist=[]){
+const projects = []
+
+export function project(name) {
+    this.name
+
+    const project =  {name: name,
+        toDos: []
+    }
+
+    projects.push(project);
+}
+
+export function toDo(title, desc, dueDate, priority, notes="", checklist=[]){
     this.title = title;
     this.desc = desc;
     this.dueDate = dueDate;
@@ -9,3 +21,9 @@ export function ToDo(title, desc, dueDate, priority, notes="", checklist=[]){
 
     return{title, desc, dueDate, priority, notes, checklist, done};
 }
+
+
+    
+    
+    
+
