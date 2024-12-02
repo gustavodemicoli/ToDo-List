@@ -1,25 +1,37 @@
-const projects = []
+import { printProjects } from "./domManipulation";
+export const projects = []
 
 export function project(name) {
-    this.name
-
-    const project =  {name: name,
-        toDos: []
+    
+    const project =  {
+        name: name,
+        toDos: [],
+        done: false
     }
 
     projects.push(project);
+    printProjects(projects)
+
+    return project
+
 }
 
-export function toDo(title, desc, dueDate, priority, notes="", checklist=[]){
-    this.title = title;
-    this.desc = desc;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.notes = notes;
-    this.checklist=[];
-    this.done = false;
+export function toDo(title, desc, dueDate, priority, notes="", checklist=[], addToProject){
 
-    return{title, desc, dueDate, priority, notes, checklist, done};
+    console.log(addToProject)
+
+    
+
+    projects.forEach(project => {
+        console.log(project)
+
+        if (project.name === addToProject) {
+            project.toDos.push({title, desc, dueDate, priority, notes, checklist, done: false})
+        }
+    } )
+    printProjects(projects)
+
+    // return{title, desc, dueDate, priority, notes, checklist, done: false};
 }
 
 
