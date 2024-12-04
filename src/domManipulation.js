@@ -1,5 +1,6 @@
 import { project, projects } from "./todos";
 
+
 export const createAndAppend = function (elementType, elementContent, parentElement ) {
     const newElement = document.createElement(elementType)
     newElement.textContent = elementContent;
@@ -8,81 +9,87 @@ export const createAndAppend = function (elementType, elementContent, parentElem
     return newElement
 }
 
+export const onLoad = function () {
+    let currProject = null
+
+    const projectPanel = document.querySelector("#project-panel")
+
+    const button = createAndAppend("button", "add project", projectPanel);
+
+    const projectInput = (function () {
+
+         const projectPanel = document.querySelector('#project-panel');
+         const inputDiv = createAndAppend('div', '', projectPanel);
+    
+    
+        const newProjectLabel = createAndAppend('label', "New Project:", inputDiv);
+        newProjectLabel.setAttribute("for", "new-project");
+    
+        createAndAppend('br', "", inputDiv)
+    
+        const newProjectInput = createAndAppend('input', "", inputDiv);
+        newProjectInput.type = "text";
+        newProjectInput.id = "new-project";
+        const submitButton = createAndAppend('button', "Submit", inputDiv);
+        submitButton.type = "submit";
+
+        submitButton.addEventListener('click', () => {
+            const newProject = newProjectInput.value.trim();
+            project(newProject);
+
+            projects.forEach(project => {
+                const div = createAndAppend("div", "", projectPanel)
+                const button = createAndAppend("button", project.name, div)
+                button.addEventListener('click', () => {
+
+                    
+                    const todoPanel = document.querySelector("#todo-panel")
+                    const todoButton = createAndAppend("button", "Add task", todoPanel);
+                    
+                    todoButton.addEventListener('click', () => { 
+                        toDoInput()
+                    })
 
 
-export const printProjects = function(projects) {
-    const projectHeader = document.querySelector('.projects');
-    projectHeader.textContent = "";
+                })
+                
+            });
 
-    projects.forEach(project => {
-        addProject(project);
-    });
 
-}
+        })
+    
+        inputDiv.style.display = "none";
 
-export const addProject = function(project) {
-
-    const projectHeader = document.querySelector('.projects');
-
-    const li = createAndAppend("li", "", projectHeader)
-    const name = createAndAppend("h5", project.name, li)
-    const ul = createAndAppend("ul", "To-Do:", li)
-
-    // console.log(project)    
-
-    project.toDos.forEach(toDo => {
         
-        createAndAppend("li", toDo.title, ul)
-    });
-
     
-
-}
-
-export const projectInput = (function () {
-
-    const inputDiv = document.querySelector('.project-input');
-
-    inputDiv.textContent = ""
-
-    const newProjectLabel = createAndAppend('label', "New Project:", inputDiv);
-    newProjectLabel.setAttribute("for", "new-project");
-
-    createAndAppend('br', "", inputDiv)
-
-    const newProjectInput = createAndAppend('input', "", inputDiv);
-    newProjectInput.type = "text";
-    newProjectInput.id = "new-project";
-    const submitButton = createAndAppend('button', "Submit", inputDiv);
-    submitButton.type = "submit";
-
-
+        function toggleVisibility() {
+            if (inputDiv.style.display === "none") {
+                inputDiv.style.display = "block"; // Show the input div
+            } else {
+                inputDiv.style.display = "none"; // Hide the input div
+            }
+        }
     
+        return {
+            toggleVisibility
+        }
+    
+    }) ();
 
-})
+    button.addEventListener('click', () => {
+       projectInput.toggleVisibility()
+    })
+};
 
 
-
-export const toDoInput = (function () {
-    const newtoDoDiv = document.querySelector(".task-input")
-    newtoDoDiv.textContent = ""
-
-    const taskLabel = createAndAppend('label', "New Task:", newtoDoDiv);
+const toDoInput = (function () {
+    const newToDoDiv = document.querySelector("#todo-panel")
+    
+    const taskLabel = createAndAppend('label', "Task Name:", newToDoDiv);
     taskLabel.setAttribute("for", "new-task");
 
-    createAndAppend('br', "", newtoDoDiv);
-
-    const taskInput = createAndAppend('input', "", newtoDoDiv);
+    createAndAppend('br', "", newToDoDiv);
+    const taskInput = createAndAppend('input', "", newToDoDiv);
     taskInput.type = "text";
     taskInput.id = "new-task";
-
-    const label = createAndAppend('label', "Select Project", newtoDoDiv);
-    taskLabel.setAttribute("for", "new-task");
-    const select = createAndAppend('select', "", newtoDoDiv)
-
-
-    projects.forEach((proj) => {
-        const option = createAndAppend('option', proj.name, select);
-        option.value = proj.name;
-    });
 })

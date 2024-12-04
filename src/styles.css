@@ -1,0 +1,21 @@
+#project-panel {
+  background-color: blue;
+  /* width: 200px;
+    height: 200px; */
+    flex:1
+
+
+}
+
+#todo-panel {
+  background-color: red;
+  flex:2
+}
+
+
+body {
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}

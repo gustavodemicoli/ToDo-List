@@ -1,4 +1,4 @@
-import { printProjects, projectInput, toDoInput } from "./domManipulation";
+import {  toDoInput } from "./domManipulation";
 
 
 export const projects = []
@@ -12,10 +12,6 @@ export function project(name) {
     }
 
     projects.push(project);
-    printProjects(projects)
-
-    projectInput();
-    toDoInput();
 
     return project
 
@@ -34,9 +30,6 @@ export function toDo(title, desc, dueDate, priority, notes="", checklist=[], add
             project.toDos.push({title, desc, dueDate, priority, notes, checklist, done: false})
         }
     } )
-    printProjects(projects)
-
-    // return{title, desc, dueDate, priority, notes, checklist, done: false};
 }
 
 
