@@ -19,15 +19,12 @@ export function project(name) {
 
 export function toDo(title, desc, dueDate, priority, notes="", checklist=[], addToProject){
 
-    console.log(addToProject)
-
-    
-
     projects.forEach(project => {
-        console.log(project)
+    
 
         if (project.name === addToProject) {
             project.toDos.push({title, desc, dueDate, priority, notes, checklist, done: false})
+            console.log("was added")
         }
     } )
 }
