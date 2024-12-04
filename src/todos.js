@@ -1,4 +1,6 @@
-import { printProjects } from "./domManipulation";
+import { printProjects, projectInput, toDoInput } from "./domManipulation";
+
+
 export const projects = []
 
 export function project(name) {
@@ -11,6 +13,9 @@ export function project(name) {
 
     projects.push(project);
     printProjects(projects)
+
+    projectInput();
+    toDoInput();
 
     return project
 
